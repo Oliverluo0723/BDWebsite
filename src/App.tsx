@@ -16,7 +16,7 @@ function App() {
 
     return (
         <>
-            <div className="app">
+            <div className="app p-4">
                 <Outlet />
             </div>
         </>
