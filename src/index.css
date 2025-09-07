@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+@font-face {
+    font-family: "tan-pearl";
+    src: url("./assets/fonts/tan-pearl.otf") format("opentype");
+}
+
 @theme {
     --base: #ededed;
     --base-black: #3c3c3c;
@@ -33,4 +38,8 @@ img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.tan-pearl {
+    font-family: "tan-pearl", "Noto Sans", sans-serif;
 }

@@ -19,3 +19,39 @@ header > div:nth-child(2) {
         flex: 1.5;
     }
 }
+
+/* View Transitions API 樣式 */
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation: none !important;
+}
+
+::view-transition-group(root) {
+    z-index: auto !important;
+}
+
+::view-transition-image-pair(root) {
+    isolation: isolate;
+    will-change: clip-path;
+    z-index: 1;
+}
+
+::view-transition-new(root) {
+    z-index: 10000;
+    animation: none !important;
+}
+
+/* 備用過渡效果（針對不支持 View Transitions 的瀏覽器） */
+.page-transition-fallback {
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.page-transition-fallback.entering {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.page-transition-fallback.entered {
+    opacity: 1;
+    transform: translateY(0);
+}

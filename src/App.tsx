@@ -1,5 +1,9 @@
+// 組件
+import Header from "@/layouts/Header/Header";
+// Lenis
 import Lenis from "lenis";
 import "lenis/dist/lenis.css";
+//
 import { Outlet } from "react-router-dom";
 import { useEffect } from "react";
 
@@ -17,6 +21,7 @@ function App() {
     return (
         <>
             <div className="app p-4">
+                <Header />
                 <Outlet />
             </div>
         </>
