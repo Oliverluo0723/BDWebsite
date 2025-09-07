@@ -14,6 +14,32 @@ header > div:nth-child(2) {
     flex: 2;
 }
 
+.contact-btn {
+    width: 130px;
+    height: 48px;
+    padding: 0.8rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 46px;
+    color: white;
+    background-color: black;
+}
+
+.btn-icon {
+    width: fit-content;
+    height: fit-content;
+    padding: 0.15rem;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.5s transform ease-in-out;
+    will-change: transform;
+}
+
+.contact-btn:hover .btn-icon {
+    transform: scale(1.1);
+}
+
 @media screen and (max-width: 480px) {
     header > div:nth-child(1) {
         flex: 1.5;
@@ -54,4 +80,8 @@ header > div:nth-child(2) {
 .page-transition-fallback.entered {
     opacity: 1;
     transform: translateY(0);
+}
+
+li:hover {
+    border-bottom: 1px black solid;
 }

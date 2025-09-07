@@ -5,8 +5,7 @@ export default function Contact() {
     return (
         <>
             <div className="revealer"></div>
-            <div className="h-24"></div>
-            <div>Contact</div>
+            <div className="mt-24">Contact</div>
         </>
     );
 }

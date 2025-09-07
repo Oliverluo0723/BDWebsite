@@ -1,5 +1,6 @@
 // 組件
 import Header from "@/layouts/Header/Header";
+import MyCursor from "@/components/MyCursor.tsx";
 // Lenis
 import Lenis from "lenis";
 import "lenis/dist/lenis.css";
@@ -20,6 +21,7 @@ function App() {
 
     return (
         <>
+            <MyCursor />
             <div className="app p-4">
                 <Header />
                 <Outlet />

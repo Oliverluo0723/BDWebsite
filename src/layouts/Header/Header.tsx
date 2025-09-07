@@ -1,6 +1,10 @@
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import type { MouseEvent } from "react";
-import "./Header.module.css";
+import "@/layouts/Header/Header.css";
+// Gsap
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { SplitText } from "gsap/SplitText";
 
 export default function Header() {
     const location = useLocation();
@@ -51,48 +55,84 @@ export default function Header() {
         }
     };
 
+    gsap.registerPlugin(useGSAP, SplitText);
+    useGSAP(() => {
+        gsap.set(".contact-btn", {
+            scale: 0,
+        });
+
+        gsap.to(".contact-btn", {
+            scale: 1,
+            duration: 0.4,
+            ease: "power4.out",
+            delay: 1.8,
+        });
+        document.fonts.ready.then(() => {
+            SplitText.create(".nav-item", {
+                type: "words",
+                mask: "words",
+                smartWrap: true,
+                onSplit: (self) => {
+                    gsap.from(self.words, {
+                        yPercent: -100,
+                        autoAlpha: 1,
+                        duration: 1.1,
+                        ease: "power3.inOut",
+                        delay: 1.4,
+                    });
+                },
+            });
+        });
+    });
+
     return (
         <header className="w-full h-24 flex items-center justify-between px-6">
             <div>
                 <Link to="/" onClick={handleNavigation("/")} className="text-2xl font-bold">
-                    <h1>nurovo</h1>
+                    <h1 className="nav-item">nurovo</h1>
                 </Link>
             </div>
 
             <div>
                 <ul>
                     <li>
-                        <Link
-                            to="/about"
-                            onClick={handleNavigation("/about")}
-                            className="hover:text-blue-500 transition-colors"
-                        >
+                        <Link to="/about" onClick={handleNavigation("/about")} className="nav-item">
                             About
                         </Link>
                     </li>
                     <li>
-                        <Link
-                            to="/work"
-                            onClick={handleNavigation("/work")}
-                            className="hover:text-blue-500 transition-colors"
-                        >
+                        <Link to="/work" onClick={handleNavigation("/work")} className="nav-item">
                             Work
                         </Link>
                     </li>
                     <li>
-                        <Link
-                            to="/contact"
-                            onClick={handleNavigation("/contact")}
-                            className="hover:text-blue-500 transition-colors"
-                        >
-                            Contact
+                        <Link to="/contact" onClick={handleNavigation("/contact")} className="nav-item">
+                            Article
                         </Link>
                     </li>
                 </ul>
             </div>
 
-            <div>
-                <p className="text-sm">sn3c.Inc</p>
+            <div className="contact-btn">
+                <div>Contact</div>
+                <div className="btn-icon">
+                    <svg width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M41.9999 24H5.99994"
+                            stroke="#333"
+                            stroke-width="4"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+                        <path
+                            d="M30 12L42 24L30 36"
+                            stroke="#333"
+                            stroke-width="4"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+                    </svg>
+                </div>
             </div>
         </header>
     );

@@ -28,6 +28,11 @@
     }
 }
 
+body,
+html {
+    cursor: none;
+}
+
 body {
     background-color: var(--base);
     font-family: "Noto Sans", sans-serif;
