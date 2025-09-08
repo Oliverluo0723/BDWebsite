@@ -11,6 +11,9 @@ importers:
       '@gsap/react':
         specifier: ^2.1.2
         version: 2.1.2(gsap@3.13.0)(react@19.1.1)
+      '@lottiefiles/dotlottie-react':
+        specifier: ^0.15.2
+        version: 0.15.2(react@19.1.1)
       '@tailwindcss/vite':
         specifier: ^4.1.13
         version: 4.1.13(vite@7.1.4(@types/node@24.3.1)(jiti@2.5.1)(lightningcss@1.30.1))
@@ -393,6 +396,14 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.30':
     resolution: {integrity: sha512-GQ7Nw5G2lTu/BtHTKfXhKHok2WGetd4XYcVKGx00SjAk8GMwgJM3zr6zORiPGuOE+/vkc90KtTosSSvaCjKb2Q==}
+
+  '@lottiefiles/dotlottie-react@0.15.2':
+    resolution: {integrity: sha512-eShVwCALLC0ew+FPzAW8iW/yhsO7yNTuUqZ9iN4y6To6oVmh3bMFZQBHnmwgDUOIZJBJADRwZ6g97TyzP8H3sg==}
+    peerDependencies:
+      react: ^17 || ^18 || ^19
+
+  '@lottiefiles/dotlottie-web@0.50.2':
+    resolution: {integrity: sha512-CKABl0kI9yY48FamEMDsYWKQQWP4VgInhwOSG/1Q2I7gOSHGv6YalNiOkiYRjVznEjavuRvfarX6cMKhcbZKew==}
 
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -1665,6 +1676,13 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
+
+  '@lottiefiles/dotlottie-react@0.15.2(react@19.1.1)':
+    dependencies:
+      '@lottiefiles/dotlottie-web': 0.50.2
+      react: 19.1.1
+
+  '@lottiefiles/dotlottie-web@0.50.2': {}
 
   '@nodelib/fs.scandir@2.1.5':
     dependencies:
