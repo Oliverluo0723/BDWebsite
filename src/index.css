@@ -8,6 +8,7 @@
 @theme {
     --base: #ededed;
     --base-black: #3c3c3c;
+    --divide-gray: #ccc;
 }
 
 @layer utilities {
@@ -34,11 +35,6 @@
     .avatar {
         @apply w-40 h-40 rounded-full bg-amber-400 overflow-hidden;
     }
-}
-
-body,
-html {
-    cursor: none;
 }
 
 body {

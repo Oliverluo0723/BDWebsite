@@ -1,0 +1,85 @@
+.card {
+    position: relative;
+    /* width: 453px; */
+    height: 450px;
+    padding: 16px;
+    color: black;
+    background-color: inherit;
+    border: 2px solid var(--divide-gray);
+    border-radius: 3rem;
+}
+
+.card > .card-inner {
+    /* width: 421px; */
+    height: 313px;
+    padding: 1.5rem;
+    border-radius: 36px;
+    color: black;
+    background-color: #dab7f5;
+    transition: 0.5s transform ease-in-out;
+    will-change: transform;
+}
+
+.card-title {
+    font-size: 3rem;
+}
+
+.card-content {
+    font-size: 1rem;
+    margin-top: 0.25rem;
+    opacity: 60%;
+}
+
+.card-badge-wrap {
+    width: 350px;
+    min-height: 100px;
+    margin-top: 3.8rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.badge {
+    display: flex;
+    width: fit-content;
+    height: 25px;
+    padding: 2px 8px;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    border-radius: 24px;
+    border: 1px solid #3c3c3c;
+}
+
+.card > .card-bottom {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    transform: translateY(-120%);
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.act-button {
+    width: 32px;
+    height: 32px;
+    padding: 8px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #d9d9d9;
+}
+
+.card > .card-inner:hover {
+    transform: scale(1.01);
+}
+
+@media screen and (width > 768px) {
+    .act-button {
+        width: 38px;
+        height: 38px;
+    }
+}
