@@ -89,7 +89,7 @@ export default function Header() {
         <header className="w-full h-24 flex items-center justify-between px-6">
             <div>
                 <Link to="/" onClick={handleNavigation("/")} className="text-2xl font-bold">
-                    <h1 className="nav-item">nurovo</h1>
+                    <h1 className="nav-item">BD</h1>
                 </Link>
             </div>
 

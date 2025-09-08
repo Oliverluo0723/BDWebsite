@@ -14,6 +14,8 @@ import work4Img from "@/assets/imgs/img1.png";
 import { useRevealer } from "@/hooks/useRevealer.tsx";
 // 組件
 import Marquee from "@/pages/Home/components/Marquee.tsx"; // 跑馬燈
+// CSS
+import "./Home.css";
 
 export default function Home() {
     useRevealer();
@@ -26,7 +28,7 @@ export default function Home() {
                 smartWrap: true,
                 onSplit: (self) => {
                     return gsap.from(self.chars, {
-                        y: 200,
+                        yPercent: 100,
                         duration: 1.15,
                         ease: "power3.inOut",
                         stagger: {
@@ -41,6 +43,7 @@ export default function Home() {
             SplitText.create("h6", {
                 type: "words",
                 mask: "words",
+                wordsClass: "word++",
                 smartWrap: true,
                 onSplit: (self) => {
                     gsap.from(self.words, {
@@ -76,7 +79,7 @@ export default function Home() {
             scrollTrigger: {
                 trigger: ".work",
                 start: "top 80%",
-                end: "top 10%",
+                end: "top 30%",
                 scrub: 1,
             },
         });
@@ -84,20 +87,22 @@ export default function Home() {
     return (
         <>
             <div className="revealer"></div>
-            <section className="text-center mt-24">
-                <h1 className="h1 text-[18.5vw] will-change-transform tan-pearl">nurove</h1>
+            <section className="text-center mt-38">
+                <h1 className="h1 text-[11.5vw] will-change-transform tan-pearl ">Hi, I am bd</h1>
                 {/*  */}
                 <div className="w-2/3 mx-auto aspect-[16/9]">
                     <img className="heroImg" src={heroImg} alt="" />
                 </div>
-                <h6 className="absolute top-5/6 left-5">Spaces defined through light and silence.</h6>
+                <h6 className="w-48 absolute top-150 md:top-120 left-15 text-left leading-relaxed pointer-events-none">
+                    在這裡, 我分享關於 視覺設計、前端開發、UI/UX, 紀錄我所學習與創作的一切
+                </h6>
             </section>
             {/* 跑馬燈 */}
             <div className="w-full h-fit">
-                <Marquee words="hihi" />
+                <Marquee words="Scroll down to see magic " />
             </div>
             {/* 作品 */}
-            <section className="work-wrap w-full min-h-svh  grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <section className="work-wrap w-full min-h-svh mt-4  grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div className="h-[400px] lg:h-[650px] bg-pink-400 work">
                     <img loading="lazy" src={work1Img} alt="" />
                     <h2>Listen 2023.04.07</h2>

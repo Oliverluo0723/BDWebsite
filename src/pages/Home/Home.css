@@ -2,3 +2,8 @@
     display: inline-block;
     white-space: nowrap;
 }
+
+.word3 {
+    font-weight: 500;
+    font-size: 1.25rem;
+}
