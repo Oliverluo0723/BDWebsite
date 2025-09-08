@@ -164,6 +164,8 @@ export default function Slider() {
                     type: "words",
                     wordsClass: "word",
                     mask: "words",
+                    autoSplit: true,
+                    smartWrap: true,
                 });
             }
 
@@ -178,14 +180,13 @@ export default function Slider() {
             });
         }
 
-        function animateSlide(direction) {
+        function animateSlide(direction: "down" | "up") {
             if (isAnimating || !scrollAllowed) return;
 
             isAnimating = true;
             scrollAllowed = false;
 
             const slider = document.querySelector(".slider");
-            // 修復: 選擇器錯誤，應該選擇 .slide 而不是 .slider
             const currentSlideElement = slider?.querySelector(".slide");
 
             if (direction === "down") {
@@ -202,144 +203,148 @@ export default function Slider() {
                     ? "polygon(20% 20%, 80% 20%, 80% 100%, 20% 100%)"
                     : "polygon(20% 0%, 80% 0%, 80% 80%, 20% 80%)";
 
-            // 修復: 添加存在性檢查
+            // 創建新的 slide
+            const newSlide = creatSlide(currentSlide);
+
+            // 設定新 slide 的初始狀態
+            gsap.set(newSlide, {
+                y: entryY,
+                clipPath: entryClipPath,
+                transformPerspective: 500,
+            });
+
+            // 將新 slide 添加到 slider 中
+            slider?.appendChild(newSlide);
+
+            // 處理文字分割
+            splitText(newSlide);
+
+            const words = newSlide.querySelectorAll(".word");
+            const lines = newSlide.querySelectorAll(".line");
+
+            gsap.set([...words, ...lines], {
+                y: "100%",
+                transformPerspective: 500,
+            });
+
+            // 同時進行舊 slide 退出和新 slide 進入動畫
+            const masterTL = gsap.timeline({
+                onComplete: () => {
+                    isAnimating = false;
+                    setTimeout(() => {
+                        scrollAllowed = true;
+                        lastScrollTime = Date.now();
+                    }, 100);
+                },
+            });
+
+            // 舊 slide 退出動畫
             if (currentSlideElement) {
-                gsap.to(currentSlideElement, {
-                    scale: 0.25,
-                    opacity: 0,
-                    rotation: 30,
-                    y: exitY,
-                    duration: 2,
-                    ease: "power4.inOut",
-                    // force3d: true,
-                    transformPerspective: 500,
-                    onComplete: () => {
-                        currentSlideElement?.remove();
+                masterTL.to(
+                    currentSlideElement,
+                    {
+                        scale: 0.25,
+                        autoAlpha: 0,
+                        // opacity: 0,
+                        rotation: 30,
+                        y: exitY,
+                        duration: 2,
+                        ease: "power4.inOut",
+                        transformPerspective: 500,
+                        onComplete: () => {
+                            currentSlideElement?.remove();
+                        },
                     },
-                });
+                    0
+                );
             }
 
-            setTimeout(() => {
-                const newSlide = creatSlide(currentSlide);
-
-                gsap.set(newSlide, {
-                    y: entryY,
-                    clipPath: entryClipPath,
-                    // force3d: true,
-                    transformPerspective: 500,
-                });
-
-                slider?.appendChild(newSlide);
-
-                splitText(newSlide);
-
-                const words = newSlide.querySelectorAll(".word");
-                const lines = newSlide.querySelectorAll(".line");
-
-                gsap.set([...words, ...lines], {
-                    y: "100%",
-                    // force3d: true,
-                    transformPerspective: 500,
-                });
-
-                gsap.to(newSlide, {
+            // 新 slide 進入動畫
+            masterTL.to(
+                newSlide,
+                {
                     y: 0,
                     clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+                    duration: 2,
                     ease: "power4.inOut",
-                    // force3d: true,
                     transformPerspective: 500,
-                    onStart: () => {
-                        const tl = gsap.timeline();
+                },
+                0.75
+            );
 
-                        // 修復: 正確的選擇器 .slide-title .word
-                        const headerWords = newSlide.querySelectorAll(".slide-title .word");
-
-                        // 修復: 添加存在性檢查
-                        if (headerWords.length > 0) {
-                            tl.to(
-                                headerWords,
-                                {
-                                    y: "0%",
-                                    duration: 1,
-                                    ease: "power4.inOut",
-                                    stagger: 0.1,
-                                    // force3d: true,
-                                    transformPerspective: 500,
-                                },
-                                0.75
-                            );
-                        }
-
-                        const tagsLines = newSlide.querySelectorAll(".slide-tags .line");
-                        const indexLines = newSlide.querySelectorAll(".slide-index-wrapper .line");
-                        const descriptionLines = newSlide.querySelectorAll(".slide-description .line");
-
-                        // 修復: 添加存在性檢查
-                        if (tagsLines.length > 0) {
-                            tl.to(
-                                tagsLines,
-                                {
-                                    y: "0%",
-                                    duration: 1,
-                                    ease: "power4.inOut",
-                                    stagger: 0.1,
-                                },
-                                "-=0.75"
-                            );
-                        }
-
-                        if (indexLines.length > 0) {
-                            tl.to(
-                                indexLines,
-                                {
-                                    y: "0%",
-                                    duration: 1,
-                                    ease: "power4.inOut",
-                                    stagger: 0.1,
-                                },
-                                "<"
-                            );
-                        }
-
-                        if (descriptionLines.length > 0) {
-                            tl.to(
-                                descriptionLines,
-                                {
-                                    y: "0%",
-                                    duration: 1,
-                                    ease: "power4.inOut",
-                                    stagger: 0.1,
-                                },
-                                "<"
-                            );
-                        }
-
-                        const linkLines = newSlide.querySelectorAll(".slide-link .line");
-
-                        if (linkLines.length > 0) {
-                            tl.to(
-                                linkLines,
-                                {
-                                    y: "0%",
-                                    duration: 1,
-                                    ease: "power4.inOut",
-                                },
-                                "-=1"
-                            );
-                        }
+            // 文字動畫
+            const headerWords = newSlide.querySelectorAll(".slide-title .word");
+            if (headerWords.length > 0) {
+                masterTL.to(
+                    headerWords,
+                    {
+                        y: "0%",
+                        duration: 1,
+                        ease: "power4.inOut",
+                        stagger: 0.1,
+                        transformPerspective: 500,
                     },
-                    onComplete: () => {
-                        isAnimating = false;
-                        setTimeout(() => {
-                            scrollAllowed = true;
-                            lastScrollTime = Date.now();
-                        }, 100);
+                    0.75
+                );
+            }
+
+            const tagsLines = newSlide.querySelectorAll(".slide-tags .line");
+            if (tagsLines.length > 0) {
+                masterTL.to(
+                    tagsLines,
+                    {
+                        y: "0%",
+                        duration: 1,
+                        ease: "power4.inOut",
+                        stagger: 0.1,
                     },
-                });
-            }, 750);
+                    "-=0.75"
+                );
+            }
+
+            const indexLines = newSlide.querySelectorAll(".slide-index-wrapper .line");
+            if (indexLines.length > 0) {
+                masterTL.to(
+                    indexLines,
+                    {
+                        y: "0%",
+                        duration: 1,
+                        ease: "power4.inOut",
+                        stagger: 0.1,
+                    },
+                    "<"
+                );
+            }
+
+            const descriptionLines = newSlide.querySelectorAll(".slide-description .line");
+            if (descriptionLines.length > 0) {
+                masterTL.to(
+                    descriptionLines,
+                    {
+                        y: "0%",
+                        duration: 1,
+                        ease: "power4.inOut",
+                        stagger: 0.1,
+                    },
+                    "-=1"
+                );
+            }
+
+            const linkLines = newSlide.querySelectorAll(".slide-link .line");
+            if (linkLines.length > 0) {
+                masterTL.to(
+                    linkLines,
+                    {
+                        y: "0%",
+                        duration: 1,
+                        ease: "power4.inOut",
+                    },
+                    1.5
+                );
+            }
         }
 
-        function handleScroll(direction) {
+        function handleScroll(direction: "down" | "up") {
             const now = Date.now();
 
             if (isAnimating || !scrollAllowed) return;

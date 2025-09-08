@@ -160,6 +160,7 @@ export default function Home() {
                     bgColor="#E2DBFA"
                     badges={["CI/CD", "Linux三大觀察指標", "角色權限控制", "容器化", "Git版本控制"]}
                 />
+                {/* Slider */}
             </section>
             <div className="w-full h-screen"></div>
         </>
