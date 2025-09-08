@@ -106,7 +106,7 @@ export default function Header() {
                         </Link>
                     </li>
                     <li>
-                        <Link to="/contact" onClick={handleNavigation("/contact")} className="nav-item">
+                        <Link to="/contact" onClick={handleNavigation("/article")} className="nav-item">
                             Article
                         </Link>
                     </li>
