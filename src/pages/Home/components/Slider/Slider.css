@@ -1,5 +1,6 @@
 .slider {
-    position: relative;
+    position: absolute;
+    left: 0;
     width: 100%;
     height: 100svh;
     background-color: #000;
@@ -14,6 +15,10 @@
     left: 0;
     width: 100%;
     height: 100svh;
+}
+
+.slide-img {
+    background-position: top;
 }
 
 .slide {

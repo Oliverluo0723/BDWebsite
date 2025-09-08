@@ -1,4 +1,8 @@
 import cyber1 from "@/assets/imgs/my/cyberpunk1.jpg";
+import cyber2 from "@/assets/imgs/my/cyberpunk2.jpg";
+import cyber3 from "@/assets/imgs/my/cyberpunk3.jpg";
+import cyber4 from "@/assets/imgs/my/cyberpunk4.jpg";
+
 import "./Slider.css";
 // gsap
 import gsap from "gsap";
@@ -19,21 +23,21 @@ export default function Slider() {
             slideDescription: "燈光與影子的交錯，營造出虛幻卻銳利的場景，彷彿夜晚都市的暗號正在低語。",
             slideUrl: "/",
             slideTags: ["Neon", "Urban", "Conceptual", "Visual Identity"],
-            slideImg: cyber1,
+            slideImg: cyber2,
         },
         {
             slideTitle: "Crimson Silence",
             slideDescription: "靜止的畫面中滲透出紅色的力量，帶著冷血的優雅，訴說一種不容忽視的存在。",
             slideUrl: "/",
             slideTags: ["Crimson", "Minimal", "Editorial", "Fashion"],
-            slideImg: cyber1,
+            slideImg: cyber3,
         },
         {
             slideTitle: "Glass Kingdom",
             slideDescription: "透明與反射構築出的冷冽王國，讓人置身其中，既孤獨又閃耀，如未來的剪影。",
             slideUrl: "/",
             slideTags: ["Glass", "Futuristic", "Editorial", "Architecture"],
-            slideImg: cyber1,
+            slideImg: cyber4,
         },
     ];
     gsap.registerPlugin(useGSAP, SplitText);
@@ -181,7 +185,8 @@ export default function Slider() {
             scrollAllowed = false;
 
             const slider = document.querySelector(".slider");
-            const currentSlideElement = slider?.querySelector(".slider");
+            // 修復: 選擇器錯誤，應該選擇 .slide 而不是 .slider
+            const currentSlideElement = slider?.querySelector(".slide");
 
             if (direction === "down") {
                 currentSlide = currentSlide === totalSlides ? 1 : currentSlide + 1;
@@ -197,19 +202,22 @@ export default function Slider() {
                     ? "polygon(20% 20%, 80% 20%, 80% 100%, 20% 100%)"
                     : "polygon(20% 0%, 80% 0%, 80% 80%, 20% 80%)";
 
-            gsap.to(currentSlideElement, {
-                scale: 0.25,
-                opacity: 0,
-                rotation: 30,
-                y: exitY,
-                duration: 2,
-                ease: "power4.inOut",
-                // force3d: true,
-                transformPerspective: 500,
-                onComplete: () => {
-                    currentSlideElement?.remove();
-                },
-            });
+            // 修復: 添加存在性檢查
+            if (currentSlideElement) {
+                gsap.to(currentSlideElement, {
+                    scale: 0.25,
+                    opacity: 0,
+                    rotation: 30,
+                    y: exitY,
+                    duration: 2,
+                    ease: "power4.inOut",
+                    // force3d: true,
+                    transformPerspective: 500,
+                    onComplete: () => {
+                        currentSlideElement?.remove();
+                    },
+                });
+            }
 
             setTimeout(() => {
                 const newSlide = creatSlide(currentSlide);
@@ -243,68 +251,82 @@ export default function Slider() {
                     onStart: () => {
                         const tl = gsap.timeline();
 
-                        const headerWords = newSlide.querySelectorAll("slide-title .word");
-                        tl.to(
-                            headerWords,
-                            {
-                                y: "0%",
-                                duration: 1,
-                                ease: "power4.inOut",
-                                stagger: 0.1,
-                                // force3d: true,
-                                transformPerspective: 500,
-                            },
-                            0.75
-                        );
+                        // 修復: 正確的選擇器 .slide-title .word
+                        const headerWords = newSlide.querySelectorAll(".slide-title .word");
+
+                        // 修復: 添加存在性檢查
+                        if (headerWords.length > 0) {
+                            tl.to(
+                                headerWords,
+                                {
+                                    y: "0%",
+                                    duration: 1,
+                                    ease: "power4.inOut",
+                                    stagger: 0.1,
+                                    // force3d: true,
+                                    transformPerspective: 500,
+                                },
+                                0.75
+                            );
+                        }
 
                         const tagsLines = newSlide.querySelectorAll(".slide-tags .line");
                         const indexLines = newSlide.querySelectorAll(".slide-index-wrapper .line");
                         const descriptionLines = newSlide.querySelectorAll(".slide-description .line");
 
-                        tl.to(
-                            tagsLines,
-                            {
-                                y: "0%",
-                                duration: 1,
-                                ease: "power4.inOut",
-                                stagger: 0.1,
-                            },
-                            "-=0.75"
-                        );
+                        // 修復: 添加存在性檢查
+                        if (tagsLines.length > 0) {
+                            tl.to(
+                                tagsLines,
+                                {
+                                    y: "0%",
+                                    duration: 1,
+                                    ease: "power4.inOut",
+                                    stagger: 0.1,
+                                },
+                                "-=0.75"
+                            );
+                        }
 
-                        tl.to(
-                            indexLines,
-                            {
-                                y: "0%",
-                                duration: 1,
-                                ease: "power4.inOut",
-                                stagger: 0.1,
-                            },
-                            "<"
-                        );
+                        if (indexLines.length > 0) {
+                            tl.to(
+                                indexLines,
+                                {
+                                    y: "0%",
+                                    duration: 1,
+                                    ease: "power4.inOut",
+                                    stagger: 0.1,
+                                },
+                                "<"
+                            );
+                        }
 
-                        tl.to(
-                            descriptionLines,
-                            {
-                                y: "0%",
-                                duration: 1,
-                                ease: "power4.inOut",
-                                stagger: 0.1,
-                            },
-                            "<"
-                        );
+                        if (descriptionLines.length > 0) {
+                            tl.to(
+                                descriptionLines,
+                                {
+                                    y: "0%",
+                                    duration: 1,
+                                    ease: "power4.inOut",
+                                    stagger: 0.1,
+                                },
+                                "<"
+                            );
+                        }
 
                         const linkLines = newSlide.querySelectorAll(".slide-link .line");
 
-                        tl.to(
-                            linkLines,
-                            {
-                                y: "0%",
-                                duration: 1,
-                                ease: "power4.inOut",
-                            },
-                            "-=1"
-                        );
+                        if (linkLines.length > 0) {
+                            tl.to(
+                                linkLines,
+                                {
+                                    y: "0%",
+                                    duration: 1,
+                                    ease: "power4.inOut",
+                                },
+                                "-=1"
+                            );
+                        }
                     },
                     onComplete: () => {
                         isAnimating = false;
@@ -388,11 +410,7 @@ export default function Slider() {
                         <h1>Monochrome Signal</h1>
                     </div>
                     <div className="slide-description">
-                        <p>
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Et eius, doloremque cum, ut cumque
-                            hic dolor laboriosam fugiat nesciunt excepturi voluptatum iure aliquam sunt fuga nisi quae?
-                            Soluta, vero facere.
-                        </p>
+                        <p>黑白之間的對比，像是一種隱喻，將時尚的冷冽感與身份的銳利邊界同時展現。</p>
                     </div>
                     <div className="slide-link">
                         <a href="#">View project</a>
@@ -402,6 +420,7 @@ export default function Slider() {
                     <div className="slide-tags">
                         <p>tags</p>
                         <p>Monochrome</p>
+                        <p>Editorial</p>
                         <p>Fashion</p>
                         <p>Visual Identity</p>
                     </div>
