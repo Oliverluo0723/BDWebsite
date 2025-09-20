@@ -32,28 +32,29 @@ export default function Header() {
         );
     };
 
-    const handleNavigation = (path: string) => (e: MouseEvent<HTMLAnchorElement>) => {
-        if (path === location.pathname) {
+    const handleNavigation =
+        (path: string) => (e: MouseEvent<HTMLAnchorElement>) => {
+            if (path === location.pathname) {
+                e.preventDefault();
+                return;
+            }
+
             e.preventDefault();
-            return;
-        }
 
-        e.preventDefault();
+            if (supportsViewTransitions) {
+                const transition = document.startViewTransition(() => {
+                    navigate(path);
+                });
 
-        if (supportsViewTransitions) {
-            const transition = document.startViewTransition(() => {
+                // 在 transition 準備就緒後執行自定義動畫
+                transition.ready.then(() => {
+                    triggerPageTransition();
+                });
+            } else {
+                // 降級處理：沒有 View Transitions 支持時使用普通導航
                 navigate(path);
-            });
-
-            // 在 transition 準備就緒後執行自定義動畫
-            transition.ready.then(() => {
-                triggerPageTransition();
-            });
-        } else {
-            // 降級處理：沒有 View Transitions 支持時使用普通導航
-            navigate(path);
-        }
-    };
+            }
+        };
 
     gsap.registerPlugin(useGSAP, SplitText);
     useGSAP(() => {
@@ -88,25 +89,41 @@ export default function Header() {
     return (
         <header className="w-full h-24 flex items-center justify-between px-6">
             <div>
-                <Link to="/" onClick={handleNavigation("/")} className="text-2xl font-bold">
-                    <h1 className="nav-item">BD</h1>
+                <Link
+                    to="/"
+                    onClick={handleNavigation("/")}
+                    className="text-2xl font-bold"
+                >
+                    <h1 className="nav-item">Hi Im BD</h1>
                 </Link>
             </div>
 
-            <div>
+            <div className="mt-4">
                 <ul>
                     <li>
-                        <Link to="/about" onClick={handleNavigation("/about")} className="nav-item">
+                        <Link
+                            to="/about"
+                            onClick={handleNavigation("/about")}
+                            className="nav-item"
+                        >
                             About
                         </Link>
                     </li>
                     <li>
-                        <Link to="/work" onClick={handleNavigation("/work")} className="nav-item">
+                        <Link
+                            to="/work"
+                            onClick={handleNavigation("/work")}
+                            className="nav-item"
+                        >
                             Work
                         </Link>
                     </li>
                     <li>
-                        <Link to="/contact" onClick={handleNavigation("/article")} className="nav-item">
+                        <Link
+                            to="/contact"
+                            onClick={handleNavigation("/article")}
+                            className="nav-item"
+                        >
                             Article
                         </Link>
                     </li>
@@ -116,7 +133,13 @@ export default function Header() {
             <div className="contact-btn">
                 <div>Contact</div>
                 <div className="btn-icon">
-                    <svg width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 48 48"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
                         <path
                             d="M41.9999 24H5.99994"
                             stroke="#333"

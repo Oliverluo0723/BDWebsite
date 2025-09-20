@@ -24,6 +24,7 @@ function App() {
             <MyCursor />
             <div className="app p-4">
                 <Header />
+                <div className="mt-24"></div>
                 <Outlet />
             </div>
         </>

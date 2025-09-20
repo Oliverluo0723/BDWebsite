@@ -19,11 +19,28 @@
     .flex-col-center {
         @apply flex flex-col justify-start items-center;
     }
+
+    .tan-pearl {
+        font-family: "tan-pearl", "Noto Sans", sans-serif;
+    }
 }
 
 @layer base {
     h1 {
-        @apply text-4xl font-medium;
+        @apply text-2xl font-medium;
+    }
+
+    body {
+        color: var(--base-black);
+        background-color: var(--base);
+        font-family: "Noto Sans", sans-serif;
+        font-optical-sizing: auto;
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
 }
 
@@ -35,21 +52,4 @@
     .avatar {
         @apply w-40 h-40 rounded-full bg-amber-400 overflow-hidden;
     }
-}
-
-body {
-    color: var(--base-black);
-    background-color: var(--base);
-    font-family: "Noto Sans", sans-serif;
-    font-optical-sizing: auto;
-}
-
-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.tan-pearl {
-    font-family: "tan-pearl", "Noto Sans", sans-serif;
 }

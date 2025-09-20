@@ -1,13 +1,11 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-
 import CustomEase from "gsap/CustomEase";
 
-gsap.registerPlugin(CustomEase);
-
-CustomEase.create("hop", "0.9, 0, 0.1, 1");
-
 export function useRevealer() {
+    gsap.registerPlugin(CustomEase);
+
+    CustomEase.create("hop", "0.9, 0, 0.1, 1");
     useGSAP(() => {
         gsap.to(".revealer", {
             scaleY: 0,

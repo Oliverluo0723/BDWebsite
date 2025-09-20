@@ -13,28 +13,37 @@ export default function Slider() {
     const slides = [
         {
             slideTitle: "Monochrome Signal",
-            slideDescription: "黑白之間的對比，像是一種隱喻，將時尚的冷冽感與身份的銳利邊界同時展現。",
+            slideDescription:
+                "黑白之間的對比，像是一種隱喻，將時尚的冷冽感與身份的銳利邊界同時展現。",
             slideUrl: "/",
-            slideTags: ["Monochrome", "Editorial", "Fashion", "Visual Identity"],
+            slideTags: [
+                "Monochrome",
+                "Editorial",
+                "Fashion",
+                "Visual Identity",
+            ],
             slideImg: cyber1,
         },
         {
             slideTitle: "Neon Mirage",
-            slideDescription: "燈光與影子的交錯，營造出虛幻卻銳利的場景，彷彿夜晚都市的暗號正在低語。",
+            slideDescription:
+                "燈光與影子的交錯，營造出虛幻卻銳利的場景，彷彿夜晚都市的暗號正在低語。",
             slideUrl: "/",
             slideTags: ["Neon", "Urban", "Conceptual", "Visual Identity"],
             slideImg: cyber2,
         },
         {
             slideTitle: "Crimson Silence",
-            slideDescription: "靜止的畫面中滲透出紅色的力量，帶著冷血的優雅，訴說一種不容忽視的存在。",
+            slideDescription:
+                "靜止的畫面中滲透出紅色的力量，帶著冷血的優雅，訴說一種不容忽視的存在。",
             slideUrl: "/",
             slideTags: ["Crimson", "Minimal", "Editorial", "Fashion"],
             slideImg: cyber3,
         },
         {
             slideTitle: "Glass Kingdom",
-            slideDescription: "透明與反射構築出的冷冽王國，讓人置身其中，既孤獨又閃耀，如未來的剪影。",
+            slideDescription:
+                "透明與反射構築出的冷冽王國，讓人置身其中，既孤獨又閃耀，如未來的剪影。",
             slideUrl: "/",
             slideTags: ["Glass", "Futuristic", "Editorial", "Architecture"],
             slideImg: cyber4,
@@ -136,7 +145,9 @@ export default function Slider() {
 
             // 總數
             const slideTotalCount = document.createElement("p");
-            slideTotalCount.textContent = totalSlides.toString().padStart(2, "0");
+            slideTotalCount.textContent = totalSlides
+                .toString()
+                .padStart(2, "0");
 
             // 把索引元素組合起來
             slideIndexWrapper.appendChild(slideIndexCopy);
@@ -190,9 +201,11 @@ export default function Slider() {
             const currentSlideElement = slider?.querySelector(".slide");
 
             if (direction === "down") {
-                currentSlide = currentSlide === totalSlides ? 1 : currentSlide + 1;
+                currentSlide =
+                    currentSlide === totalSlides ? 1 : currentSlide + 1;
             } else {
-                currentSlide = currentSlide === 1 ? totalSlides : currentSlide - 1;
+                currentSlide =
+                    currentSlide === 1 ? totalSlides : currentSlide - 1;
             }
 
             const exitY = direction === "down" ? "-200vh" : "200vh";
@@ -248,7 +261,7 @@ export default function Slider() {
                         // opacity: 0,
                         rotation: 30,
                         y: exitY,
-                        duration: 2,
+                        duration: 1,
                         ease: "power4.inOut",
                         transformPerspective: 500,
                         onComplete: () => {
@@ -302,7 +315,9 @@ export default function Slider() {
                 );
             }
 
-            const indexLines = newSlide.querySelectorAll(".slide-index-wrapper .line");
+            const indexLines = newSlide.querySelectorAll(
+                ".slide-index-wrapper .line"
+            );
             if (indexLines.length > 0) {
                 masterTL.to(
                     indexLines,
@@ -316,7 +331,9 @@ export default function Slider() {
                 );
             }
 
-            const descriptionLines = newSlide.querySelectorAll(".slide-description .line");
+            const descriptionLines = newSlide.querySelectorAll(
+                ".slide-description .line"
+            );
             if (descriptionLines.length > 0) {
                 masterTL.to(
                     descriptionLines,
@@ -415,7 +432,9 @@ export default function Slider() {
                         <h1>Monochrome Signal</h1>
                     </div>
                     <div className="slide-description">
-                        <p>黑白之間的對比，像是一種隱喻，將時尚的冷冽感與身份的銳利邊界同時展現。</p>
+                        <p>
+                            黑白之間的對比，像是一種隱喻，將時尚的冷冽感與身份的銳利邊界同時展現。
+                        </p>
                     </div>
                     <div className="slide-link">
                         <a href="#">View project</a>

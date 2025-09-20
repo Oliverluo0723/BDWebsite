@@ -9,7 +9,6 @@ import work1Img from "@/assets/imgs/works/img1.jpg";
 import work2Img from "@/assets/imgs/works/img2.jpg";
 import work3Img from "@/assets/imgs/works/img3.png";
 import work4Img from "@/assets/imgs/img1.png";
-
 // hooks
 import { useRevealer } from "@/hooks/useRevealer.tsx";
 // 組件
@@ -101,13 +100,16 @@ export default function Home() {
         <>
             <div className="revealer"></div>
             <section className="text-center mt-38">
-                <h1 className="h1 text-[11.5vw] will-change-transform tan-pearl ">Hi, I am bd</h1>
+                <h1 className="h1 text-[11.5vw] will-change-transform tan-pearl ">
+                    Hi, I am bd
+                </h1>
                 {/*  */}
                 <div className="w-2/3 mx-auto aspect-[16/9]">
                     <img className="heroImg" src={heroImg} alt="" />
                 </div>
                 <h6 className="w-48 absolute top-150 md:top-120 left-15 text-left leading-relaxed pointer-events-none">
-                    在這裡, 我分享關於 視覺設計、前端開發、UI/UX, 紀錄我所學習與創作的一切
+                    在這裡, 我分享關於 視覺設計、前端開發、UI/UX,
+                    紀錄我所學習與創作的一切
                 </h6>
             </section>
             {/* 跑馬燈 */}
@@ -151,14 +153,26 @@ export default function Home() {
                     title="UI/UX"
                     content="以人為本，構建順暢且沉浸的數位體驗。"
                     bgColor="#FFE1CC"
-                    badges={["Figma", "使用者旅程地圖", "Fitts Law", "Microinteractions", "漸進式揭露資訊"]}
+                    badges={[
+                        "Figma",
+                        "使用者旅程地圖",
+                        "Fitts Law",
+                        "Microinteractions",
+                        "漸進式揭露資訊",
+                    ]}
                 />
 
                 <Card
                     title="DevOps"
                     content="透過自動化與可觀察性，實現穩定順暢的服務交付。"
                     bgColor="#E2DBFA"
-                    badges={["CI/CD", "Linux三大觀察指標", "角色權限控制", "容器化", "Git版本控制"]}
+                    badges={[
+                        "CI/CD",
+                        "Linux三大觀察指標",
+                        "角色權限控制",
+                        "容器化",
+                        "Git版本控制",
+                    ]}
                 />
                 {/* Slider */}
             </section>
