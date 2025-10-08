@@ -79,7 +79,10 @@ export default function About() {
                 <div className="w-full flex-center gap-8">
                     {BrandIcon.map((brand) => {
                         return (
-                            <div className="w-15 h-15  rounded-full" key={brand.id}>
+                            <div
+                                className="w-15 h-15  rounded-full"
+                                key={brand.id}
+                            >
                                 <a href={brand.link} target="_blank">
                                     <brand.icon />
                                 </a>
@@ -89,12 +92,17 @@ export default function About() {
                 </div>
 
                 <section className="w-full h-svh flex-col-center">
-                    <h2 className="text-5xl font-medium text-center">Hi I am BD</h2>
+                    <h2 className="text-5xl font-medium text-center">
+                        Hi I am BD
+                    </h2>
                     <div className="w-[400px] lg:w-[800px]">
                         <div className="content text-2xl mt-4 leading-relaxed">
-                            嗨 我是BD 一名專注於前端開發的工程師, 喜歡將想法透過程式語言實現成有溫度的作品,
-                            日常中我不只在意功能是否能順利運作, 更關心使用者體驗是否流暢, 介面是否細緻, 熱愛學習新技術
-                            也樂於把複雜的東西轉化成簡單, 直覺的互動, 希望透過專案與作品
+                            嗨 我是BD 一名專注於前端開發的工程師,
+                            喜歡將想法透過程式語言實現成有溫度的作品,
+                            日常中我不只在意功能是否能順利運作,
+                            更關心使用者體驗是否流暢, 介面是否細緻,
+                            熱愛學習新技術 也樂於把複雜的東西轉化成簡單,
+                            直覺的互動, 希望透過專案與作品
                             讓更多人感受到設計與程式結合的美好
                         </div>
                     </div>

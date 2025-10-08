@@ -17,7 +17,10 @@ export default function Card(prop: Props) {
     const badgeList = prop.badges || [];
     return (
         <article className="card" role="ariticle">
-            <div className="card-inner" style={{ backgroundColor: prop.bgColor || "" }}>
+            <div
+                className="card-inner"
+                style={{ backgroundColor: prop.bgColor || "" }}
+            >
                 <div className="card-title">
                     <h3>{cardTitle}</h3>
                 </div>
@@ -35,8 +38,7 @@ export default function Card(prop: Props) {
                 </div>
             </div>
             <footer className="card-bottom">
-                <p>探索更多</p>
-                <div className="act-button">
+                <div className="act-button ">
                     <Link
                         to={cardLink}
                         aria-label={`探索更多關於${cardTitle}的內容`}
